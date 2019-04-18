@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ExpensesManager.Models;
+using ExpensesManager.Models.ViewModels;
 
 namespace ExpensesManager.Controllers
 {

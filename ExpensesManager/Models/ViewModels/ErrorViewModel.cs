@@ -1,6 +1,6 @@
 using System;
 
-namespace ExpensesManager.Models
+namespace ExpensesManager.Models.ViewModels
 {
     public class ErrorViewModel
     {
