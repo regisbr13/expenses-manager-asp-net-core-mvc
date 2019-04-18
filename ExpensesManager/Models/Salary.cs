@@ -6,7 +6,7 @@ namespace ExpensesManager.Models
     {
         public int Id { get; set; }
 
-        public int MontId { get; set; }
+        public int MonthId { get; set; }
         public Month Month { get; set; }
 
         [Required(ErrorMessage ="campo obrigatório")]
