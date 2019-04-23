@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesManager.Models
@@ -10,6 +11,7 @@ namespace ExpensesManager.Models
         [Display(Name = "Nome")]
         [Required(ErrorMessage ="campo obrigatório")]
         [StringLength(50, ErrorMessage ="use até {1} caracteres")]
+        [Remote("ExpenseTypeExist", "ExpenseType")]
         public string Name { get; set; }
 
         public ICollection<Expense> Expenses { get; set; }

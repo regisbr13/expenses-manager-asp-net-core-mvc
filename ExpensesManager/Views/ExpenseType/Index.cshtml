@@ -5,6 +5,10 @@
     }
 
     <br />
+@if(TempData["confirm"] != null)
+{
+    <h6 class="alert alert-success" role="alert">@TempData["confirm"]</h6>
+}
     <p>
         <a class="btn btn-primary btn-sm create"><i class="glyphicon glyphicon-plus-sign"></i></a>
     </p>

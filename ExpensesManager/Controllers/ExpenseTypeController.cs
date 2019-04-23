@@ -23,6 +23,14 @@ namespace ExpensesManager.Controllers
             return View(await _expenseTypeService.FindAllAsync());
         }
 
+        // Remote Validation
+        public async Task<JsonResult> ExpenseTypeExist(string Name)
+        {
+            if (await _expenseTypeService.ObjExists(Name))
+                return Json("Tipo de despesa já cadastrado.");
+            return Json(true);
+        }
+
         // GET:
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,6 +61,7 @@ namespace ExpensesManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["confirm"] = "Tipo de despesa " + expenseType.Name + " criado com sucesso.";
                 await _expenseTypeService.InsertAsync(expenseType);
                 return RedirectToAction(nameof(Index));
             }
@@ -87,6 +96,7 @@ namespace ExpensesManager.Controllers
 
             if (ModelState.IsValid)
             {
+                TempData["confirm"] = "Tipo de despesa " + obj.Name + " atualizado com sucesso.";
                 await _expenseTypeService.UpdateAsync(obj);
                 return RedirectToAction(nameof(Index));
             }
@@ -115,6 +125,8 @@ namespace ExpensesManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            ExpenseType obj = await _expenseTypeService.FindByIdAsync(id);
+            TempData["confirm"] = "Tipo de despesa " + obj.Name + " excluído com sucesso.";
             await _expenseTypeService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }

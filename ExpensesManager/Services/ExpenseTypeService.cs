@@ -64,5 +64,13 @@ namespace ExpensesManager.Services
 
         }
 
+        // Obj Exists
+        public async Task<bool> ObjExists(string name)
+        {
+            if (await _context.ExpensesTypes.AnyAsync(e => e.Name.ToUpper() == name.ToUpper()))
+                return true;
+            return false;
+        }
+
     }
 }

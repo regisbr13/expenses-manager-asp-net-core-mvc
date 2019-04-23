@@ -24,19 +24,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ExpensesManager</a>
+                <a asp-area="" asp-controller="Expenses" asp-action="Index" class="navbar-brand">Gerenciador de Despesas</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Salaries" asp-action="Index">Salários</a></li>
+                    <li><a asp-area="" asp-controller="ExpenseType" asp-action="Index">Tipos de despesas</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
         @RenderBody()
