@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ExpensesManager.Models.ExpenseType>
+
+    @{
+    ViewData["Title"] = "Tipos de despesas";
+    }
+
+    <br />
+    <p>
+        <a class="btn btn-primary btn-sm create"><i class="glyphicon glyphicon-plus-sign"></i></a>
+    </p>
+    <table class="table table-hover table-striped text-center">
+        <thead>
+            <tr class="bg-primary">
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-warning btn-sm edit" data-id="@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a class="btn btn-danger btn-sm delete" data-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="modal" role="dialog"></div>
+
+
+    @section Scripts{
+    <script>
+        $(function () {
+            $(".create").click(function () {
+                $("#modal").load("ExpenseType/Create", function () {
+                    $("#modal").modal();
+                })
+            })
+        });
+        $(function () {
+            $(".edit").click(function () {
+                var id = $(this).attr("data-id");
+                $("#modal").load("ExpenseType/Edit?Id=" + id, function () {
+                    $("#modal").modal();
+                })
+            })
+        });
+        $(function () {
+            $(".delete").click(function () {
+                var id = $(this).attr("data-id");
+                $("#modal").load("ExpenseType/Delete?Id=" + id, function () {
+                    $("#modal").modal();
+                })
+            })
+        });
+    </script>
+    }
+
+
+    <style>
+        th {
+            text-align: center;
+        }
+    </style>
