@@ -18,9 +18,22 @@ namespace ExpensesManager.Controllers
         }
 
         // GET:
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _expenseTypeService.FindAllAsync());
+            var list = await _expenseTypeService.FindAllAsync();
+            return View(list.OrderBy(obj => obj.Name));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(string txtSearch)
+        {
+            if (!String.IsNullOrEmpty(txtSearch))
+            {
+                return View(await _expenseTypeService.Search(txtSearch));
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // Remote Validation

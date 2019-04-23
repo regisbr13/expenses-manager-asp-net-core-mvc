@@ -72,5 +72,10 @@ namespace ExpensesManager.Services
             return false;
         }
 
+        // Search
+        public async Task<List<ExpenseType>> Search(string s)
+        {
+            return await _context.ExpensesTypes.Where(e => e.Name.ToUpper().Contains(s.ToUpper())).ToListAsync();
+        }
     }
 }
