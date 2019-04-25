@@ -11,7 +11,7 @@ namespace ExpensesManager.Map
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(50).IsRequired();
 
-            builder.HasMany(e => e.Expenses).WithOne(e => e.ExpenseType).HasForeignKey(e => e.ExpenseTypeId);
+            builder.HasMany(e => e.Expenses).WithOne(e => e.ExpenseType).HasForeignKey(e => e.ExpenseTypeId).OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("ExpenseType");
         }

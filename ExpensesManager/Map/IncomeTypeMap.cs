@@ -12,7 +12,7 @@ namespace ExpensesManager.Map
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(50).IsRequired();
 
-            builder.HasMany(e => e.Incomes).WithOne(e => e.IncomeType).HasForeignKey(e => e.IncomeTypeId);
+            builder.HasMany(e => e.Incomes).WithOne(e => e.IncomeType).HasForeignKey(e => e.IncomeTypeId).OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("IncomeType");
         }

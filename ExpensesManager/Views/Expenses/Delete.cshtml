@@ -1,0 +1,50 @@
+﻿@model ExpensesManager.Models.Expense
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Deletar";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Excluir despesa</h4>
+        </div>
+        <div class="modal-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Month)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Month.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExpenseType)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ExpenseType.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Value)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Value)
+                </dd>
+            </dl>
+        </div>
+        <div class="modal-footer">
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+                <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
+            </form>
+        </div>
+    </div>
+</div>

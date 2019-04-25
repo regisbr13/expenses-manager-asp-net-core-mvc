@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ExpensesManager.Models;
 using ExpensesManager.Services;
+using ExpensesManager.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpensesManager.Controllers
@@ -121,10 +122,18 @@ namespace ExpensesManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            IncomeType obj = await _incomeTypeService.FindByIdAsync(id);
-            TempData["confirm"] = "Tipo de receita " + obj.Name + " excluído com sucesso.";
-            await _incomeTypeService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                IncomeType obj = await _incomeTypeService.FindByIdAsync(id);
+                await _incomeTypeService.RemoveAsync(id);
+                TempData["confirm"] = "Tipo de receita " + obj.Name + " excluído com sucesso.";
+                return RedirectToAction(nameof(Index));
+            }
+            catch(IntegrityException e)
+            {
+                TempData["error"] = e.Message;
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

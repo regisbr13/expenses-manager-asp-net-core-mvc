@@ -1,5 +1,6 @@
 ﻿using ExpensesManager.Data;
 using ExpensesManager.Models;
+using ExpensesManager.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -58,9 +59,16 @@ namespace ExpensesManager.Services
         // REMOVER:
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.ExpensesTypes.FindAsync(id);
-            _context.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.ExpensesTypes.FindAsync(id);
+                _context.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException)
+            {
+                throw new IntegrityException("Não é possível exluir pois existem despesas deste tipo cadastradas");
+            }
 
         }
 

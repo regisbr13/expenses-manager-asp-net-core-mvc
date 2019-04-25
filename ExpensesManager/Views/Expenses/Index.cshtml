@@ -1,19 +1,17 @@
-﻿@model IEnumerable<ExpensesManager.Models.ExpenseType>
+﻿@model X.PagedList.IPagedList<ExpensesManager.Models.Expense>
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
 
 @{
-    ViewData["Title"] = "Tipos de despesa";
+    ViewData["Title"] = "Despesas";
 }
 
-<h2 class="text-center text-danger">Tipos de despesa</h2>
+<h2 class="text-center text-danger">Despesas</h2>
 @if (TempData["confirm"] != null)
 {
     <h6 class="alert alert-success" role="alert">@TempData["confirm"]</h6>
 }
 
-@if (TempData["error"] != null)
-{
-    <h6 class="alert alert-danger" role="alert">@TempData["error"]</h6>
-}
 <div class="row">
     <div class="col-md-1 col-xs-1">
         <a class="btn btn-primary btn-sm create"><i class="glyphicon glyphicon-plus-sign"></i></a>
@@ -21,7 +19,7 @@
     <form asp-action="Index" method="post">
         <div class="col-md-3 text-left col-xs-11">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" name="txtSearch" placeholder="Buscar tipo de despesa" aria-describedby="sizing-addon2">
+                <input type="text" class="form-control" name="txtSearch" placeholder="Buscar despesa pela descrição" aria-describedby="sizing-addon2">
                 <span class="input-group-btn" id="sizing-addon2">
                     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                 </span>
@@ -35,7 +33,13 @@
     <thead>
         <tr class="bg-primary">
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Mês
+            </th>
+            <th>
+                Tipo de despesa
+            </th>
+            <th>
+                Valor
             </th>
             <th></th>
         </tr>
@@ -45,16 +49,30 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.Month.Name)
                 </td>
                 <td>
-                    <a class="btn  edit" data-id="@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                    @Html.DisplayFor(modelItem => item.ExpenseType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    <a class="btn detail" data-id="@item.Id"><i class="glyphicon glyphicon-info-sign"></i></a>
+                    <a class="btn edit" data-id="@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
                     <a class="btn delete" data-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "Incomes", new { page }), new PagedListRenderOptionsBase
+{
+ContainerDivClasses = new string[] { "text-center" },
+LiElementClasses = new string[] { "page-item" },
+PageClasses = new string[] { "page-link" }
+})
 
 <div class="modal fade" id="modal" role="dialog"></div>
 
@@ -63,7 +81,7 @@
     <script>
         $(function () {
             $(".create").click(function () {
-                $("#modal").load("ExpenseType/Create", function () {
+                $("#modal").load("Expenses/Create", function () {
                     $("#modal").modal();
                 })
             })
@@ -71,7 +89,7 @@
         $(function () {
             $(".edit").click(function () {
                 var id = $(this).attr("data-id");
-                $("#modal").load("ExpenseType/Edit?Id=" + id, function () {
+                $("#modal").load("Expenses/Edit?Id=" + id, function () {
                     $("#modal").modal();
                 })
             })
@@ -79,14 +97,21 @@
         $(function () {
             $(".delete").click(function () {
                 var id = $(this).attr("data-id");
-                $("#modal").load("ExpenseType/Delete?Id=" + id, function () {
+                $("#modal").load("Expenses/Delete?Id=" + id, function () {
+                    $("#modal").modal();
+                })
+            })
+        });
+        $(function () {
+            $(".detail").click(function () {
+                var id = $(this).attr("data-id");
+                $("#modal").load("Expenses/Details?Id=" + id, function () {
                     $("#modal").modal();
                 })
             })
         });
     </script>
 }
-
 
 <style>
     th {
