@@ -17,7 +17,7 @@ namespace ExpensesManager.Map
             builder.Property(m => m.Name).HasMaxLength(50).IsRequired();
 
             builder.HasMany(m => m.Expenses).WithOne(m => m.Month).HasForeignKey(m => m.MonthId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(m => m.Salary).WithOne(m => m.Month).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.Incomes).WithOne(m => m.Month).HasForeignKey(m => m.MonthId).OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("Months");
         }

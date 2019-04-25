@@ -11,9 +11,10 @@ namespace ExpensesManager.Data
     public class Context : DbContext
     {
         public DbSet<Month> Months { get; set; }
-        public DbSet<Salary> Salaries { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<ExpenseType> ExpensesTypes { get; set; }
+        public DbSet<IncomeType> IncomesTypes { get; set; }
+        public DbSet<Income> Incomes { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -22,9 +23,10 @@ namespace ExpensesManager.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ExpenseTypeMap());
-            modelBuilder.ApplyConfiguration(new SalaryMap());
             modelBuilder.ApplyConfiguration(new MonthMap());
             modelBuilder.ApplyConfiguration(new ExpenseMap());
+            modelBuilder.ApplyConfiguration(new IncomeTypeMap());
+            modelBuilder.ApplyConfiguration(new IncomeMap());
         }
     }
 }

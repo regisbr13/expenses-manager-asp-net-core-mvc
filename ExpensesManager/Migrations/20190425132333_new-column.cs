@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExpensesManager.Migrations
 {
-    public partial class criacaoDB : Migration
+    public partial class newcolumn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,19 @@ namespace ExpensesManager.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExpenseType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IncomeType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IncomeType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,6 +52,7 @@ namespace ExpensesManager.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MonthId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(type: "varchar", maxLength: 250, nullable: true),
                     ExpenseTypeId = table.Column<int>(nullable: false),
                     Value = table.Column<double>(nullable: false)
                 },
@@ -60,19 +74,27 @@ namespace ExpensesManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Salaries",
+                name: "Incomes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MonthId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(type: "varchar", maxLength: 250, nullable: true),
+                    IncomeTypeId = table.Column<int>(nullable: false),
                     Value = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Salaries", x => x.Id);
+                    table.PrimaryKey("PK_Incomes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Salaries_Months_MonthId",
+                        name: "FK_Incomes_IncomeType_IncomeTypeId",
+                        column: x => x.IncomeTypeId,
+                        principalTable: "IncomeType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Incomes_Months_MonthId",
                         column: x => x.MonthId,
                         principalTable: "Months",
                         principalColumn: "Id",
@@ -90,10 +112,14 @@ namespace ExpensesManager.Migrations
                 column: "MonthId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Salaries_MonthId",
-                table: "Salaries",
-                column: "MonthId",
-                unique: true);
+                name: "IX_Incomes_IncomeTypeId",
+                table: "Incomes",
+                column: "IncomeTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Incomes_MonthId",
+                table: "Incomes",
+                column: "MonthId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -102,10 +128,13 @@ namespace ExpensesManager.Migrations
                 name: "Expenses");
 
             migrationBuilder.DropTable(
-                name: "Salaries");
+                name: "Incomes");
 
             migrationBuilder.DropTable(
                 name: "ExpenseType");
+
+            migrationBuilder.DropTable(
+                name: "IncomeType");
 
             migrationBuilder.DropTable(
                 name: "Months");

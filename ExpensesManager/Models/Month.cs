@@ -10,6 +10,7 @@ namespace ExpensesManager.Models
 
         public ICollection<Expense> Expenses { get; set; }
 
-        public Salary Salary { get; set; }
+        public ICollection<Income> Incomes { get; set; }
+
     }
 }

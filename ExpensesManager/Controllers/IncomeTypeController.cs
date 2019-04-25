@@ -8,44 +8,43 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExpensesManager.Controllers
 {
-    public class ExpenseTypeController : Controller
+    public class IncomeTypeController : Controller
     {
-        private readonly ExpenseTypeService _expenseTypeService;
+        private readonly IncomeTypeService _incomeTypeService;
 
-        public ExpenseTypeController(ExpenseTypeService expenseTypeService)
+        public IncomeTypeController(IncomeTypeService incomeTypeService)
         {
-            _expenseTypeService = expenseTypeService;
+            _incomeTypeService = incomeTypeService;
         }
 
         // GET:
-        [HttpGet("/Tipos-de-despesa")]
+        [HttpGet("/Tipos-de-receita")]
         public async Task<IActionResult> Index()
         {
-            var list = await _expenseTypeService.FindAllAsync();
+            var list = await _incomeTypeService.FindAllAsync();
             return View(list.OrderBy(obj => obj.Name));
         }
 
-        [HttpPost("/Tipos-de-despesa")]
+        [HttpPost("/Tipos-de-receita")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(string txtSearch)
         {
             if (!String.IsNullOrEmpty(txtSearch))
             {
-                return View(await _expenseTypeService.Search(txtSearch));
+                return View(await _incomeTypeService.Search(txtSearch));
             }
             return RedirectToAction(nameof(Index));
         }
 
         // Remote Validation
-        public async Task<JsonResult> ExpenseTypeExist(string Name)
+        public async Task<JsonResult> IncomeTypeExist(string Name)
         {
-            if (await _expenseTypeService.ObjExists(Name))
-                return Json("Tipo de despesa já cadastrado.");
+            if (await _incomeTypeService.ObjExists(Name))
+                return Json("Tipo de receita já cadastrado.");
             return Json(true);
         }
 
         // CREATE GET:
-        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -54,19 +53,18 @@ namespace ExpensesManager.Controllers
         // CREATE POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ExpenseType expenseType)
+        public async Task<IActionResult> Create(IncomeType expenseType)
         {
             if (ModelState.IsValid)
             {
-                TempData["confirm"] = "Tipo de despesa " + expenseType.Name + " criado com sucesso.";
-                await _expenseTypeService.InsertAsync(expenseType);
+                TempData["confirm"] = "Tipo de receita " + expenseType.Name + " cadastrado com sucesso.";
+                await _incomeTypeService.InsertAsync(expenseType);
                 return RedirectToAction(nameof(Index));
             }
             return View(expenseType);
         }
 
         // EDIT GET:
-        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,7 +72,7 @@ namespace ExpensesManager.Controllers
                 return NotFound();
             }
 
-            var expenseType = await _expenseTypeService.FindByIdAsync(id);
+            var expenseType = await _incomeTypeService.FindByIdAsync(id);
             if (expenseType == null)
             {
                 return NotFound();
@@ -85,7 +83,7 @@ namespace ExpensesManager.Controllers
         // Post:
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ExpenseType obj)
+        public async Task<IActionResult> Edit(int id, IncomeType obj)
         {
             if (id != obj.Id)
             {
@@ -94,15 +92,14 @@ namespace ExpensesManager.Controllers
 
             if (ModelState.IsValid)
             {
-                TempData["confirm"] = "Tipo de despesa " + obj.Name + " atualizado com sucesso.";
-                await _expenseTypeService.UpdateAsync(obj);
+                TempData["confirm"] = "Tipo de receita " + obj.Name + " atualizado com sucesso.";
+                await _incomeTypeService.UpdateAsync(obj);
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
         }
 
         // DELETE GET:
-        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -110,7 +107,7 @@ namespace ExpensesManager.Controllers
                 return NotFound();
             }
 
-            var obj = await _expenseTypeService.FindByIdAsync(id);
+            var obj = await _incomeTypeService.FindByIdAsync(id);
             if (obj == null)
             {
                 return NotFound();
@@ -124,9 +121,9 @@ namespace ExpensesManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            ExpenseType obj = await _expenseTypeService.FindByIdAsync(id);
-            TempData["confirm"] = "Tipo de despesa " + obj.Name + " excluído com sucesso.";
-            await _expenseTypeService.RemoveAsync(id);
+            IncomeType obj = await _incomeTypeService.FindByIdAsync(id);
+            TempData["confirm"] = "Tipo de receita " + obj.Name + " excluído com sucesso.";
+            await _incomeTypeService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

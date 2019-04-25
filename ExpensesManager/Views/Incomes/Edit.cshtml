@@ -1,0 +1,59 @@
+﻿@model ExpensesManager.Models.Income
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Editar";
+}
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Editar receita</h4>
+        </div>
+        <form asp-action="Edit">
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="MonthId" class="control-label col-md-3"></label>
+                        <div class="col-md-6">
+                            <select asp-for="MonthId" class="form-control" asp-items="ViewBag.MonthId"></select>
+                            <span asp-validation-for="MonthId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label col-md-3"></label>
+                        <div class="col-md-6">
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IncomeTypeId" class="control-label col-md-3"></label>
+                        <div class="col-md-6">
+                            <select asp-for="IncomeTypeId" class="form-control" asp-items="ViewBag.IncomeTypeId"></select>
+                            <span asp-validation-for="IncomeTypeId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Value" class="control-label col-md-3"></label>
+                        <div class="col-md-6">
+                            <input asp-for="Value" class="form-control" />
+                            <span asp-validation-for="Value" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+                <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

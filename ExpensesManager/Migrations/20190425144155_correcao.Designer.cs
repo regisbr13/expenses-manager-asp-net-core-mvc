@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpensesManager.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190418224403_criacaoDB")]
-    partial class criacaoDB
+    [Migration("20190425144155_correcao")]
+    partial class correcao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,11 @@ namespace ExpensesManager.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(250);
 
                     b.Property<int>("ExpenseTypeId");
 
@@ -56,6 +61,47 @@ namespace ExpensesManager.Migrations
                     b.ToTable("ExpenseType");
                 });
 
+            modelBuilder.Entity("ExpensesManager.Models.Income", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description")
+                        .HasColumnType("nvarchar")
+                        .HasMaxLength(250);
+
+                    b.Property<int>("IncomeTypeId");
+
+                    b.Property<int>("MonthId");
+
+                    b.Property<double>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IncomeTypeId");
+
+                    b.HasIndex("MonthId");
+
+                    b.ToTable("Incomes");
+                });
+
+            modelBuilder.Entity("ExpensesManager.Models.IncomeType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IncomeType");
+                });
+
             modelBuilder.Entity("ExpensesManager.Models.Month", b =>
                 {
                     b.Property<int>("Id");
@@ -67,24 +113,6 @@ namespace ExpensesManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Months");
-                });
-
-            modelBuilder.Entity("ExpensesManager.Models.Salary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MonthId");
-
-                    b.Property<double>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MonthId")
-                        .IsUnique();
-
-                    b.ToTable("Salaries");
                 });
 
             modelBuilder.Entity("ExpensesManager.Models.Expense", b =>
@@ -100,11 +128,16 @@ namespace ExpensesManager.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ExpensesManager.Models.Salary", b =>
+            modelBuilder.Entity("ExpensesManager.Models.Income", b =>
                 {
+                    b.HasOne("ExpensesManager.Models.IncomeType", "IncomeType")
+                        .WithMany("Incomes")
+                        .HasForeignKey("IncomeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("ExpensesManager.Models.Month", "Month")
-                        .WithOne("Salary")
-                        .HasForeignKey("ExpensesManager.Models.Salary", "MonthId")
+                        .WithMany("Incomes")
+                        .HasForeignKey("MonthId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

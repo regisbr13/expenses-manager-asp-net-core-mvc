@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ExpensesManager.Models.ExpenseType>
+﻿@model IEnumerable<ExpensesManager.Models.IncomeType>
 
     @{
-    ViewData["Title"] = "Tipos de despesa";
+    ViewData["Title"] = "Tipos de receita";
     }
 
-<h2 class="text-center text-danger">Tipos de despesa</h2>
+<h2 class="text-center text-success">Tipos de receita</h2>
 @if(TempData["confirm"] != null)
 {
     <h6 class="alert alert-success" role="alert">@TempData["confirm"]</h6>
@@ -43,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a class="btn  edit" data-id="@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a class="btn edit" data-id="@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
                     <a class="btn delete" data-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>
             </tr>
@@ -58,7 +58,7 @@
     <script>
         $(function () {
             $(".create").click(function () {
-                $("#modal").load("ExpenseType/Create", function () {
+                $("#modal").load("IncomeType/Create", function () {
                     $("#modal").modal();
                 })
             })
@@ -66,7 +66,7 @@
         $(function () {
             $(".edit").click(function () {
                 var id = $(this).attr("data-id");
-                $("#modal").load("ExpenseType/Edit?Id=" + id, function () {
+                $("#modal").load("IncomeType/Edit?Id=" + id, function () {
                     $("#modal").modal();
                 })
             })
@@ -74,14 +74,13 @@
         $(function () {
             $(".delete").click(function () {
                 var id = $(this).attr("data-id");
-                $("#modal").load("ExpenseType/Delete?Id=" + id, function () {
+                $("#modal").load("IncomeType/Delete?Id=" + id, function () {
                     $("#modal").modal();
                 })
             })
         });
     </script>
     }
-
 
 <style>
     th {

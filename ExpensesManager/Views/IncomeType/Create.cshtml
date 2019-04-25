@@ -1,23 +1,23 @@
-﻿@model ExpensesManager.Models.ExpenseType
+﻿@model ExpensesManager.Models.IncomeType
 
 @{
     Layout = null;
-    ViewData["Title"] = "Editar";
+    ViewData["Title"] = "Novo";
 }
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Editar tipo de despesa</h4>
+            <h4 class="modal-title">Adicionar novo tipo de receita</h4>
         </div>
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div class="modal-body">
                 <div class="form-horizontal">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
                     <div class="form-group">
                         <label asp-for="Name" class="control-label col-md-3"></label>
                         <div class="col-md-6">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+                <button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
                 <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
             </div>
         </form>

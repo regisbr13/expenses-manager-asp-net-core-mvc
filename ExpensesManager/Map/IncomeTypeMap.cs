@@ -2,18 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 namespace ExpensesManager.Map
 {
-    public class ExpenseTypeMap : IEntityTypeConfiguration<ExpenseType>
+    public class IncomeTypeMap : IEntityTypeConfiguration<IncomeType>
     {
-        public void Configure(EntityTypeBuilder<ExpenseType> builder)
+        public void Configure(EntityTypeBuilder<IncomeType> builder)
         {
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(50).IsRequired();
 
-            builder.HasMany(e => e.Expenses).WithOne(e => e.ExpenseType).HasForeignKey(e => e.ExpenseTypeId);
+            builder.HasMany(e => e.Incomes).WithOne(e => e.IncomeType).HasForeignKey(e => e.IncomeTypeId);
 
-            builder.ToTable("ExpenseType");
+            builder.ToTable("IncomeType");
         }
     }
 }
+
