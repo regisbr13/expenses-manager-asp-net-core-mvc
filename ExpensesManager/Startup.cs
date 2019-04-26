@@ -87,7 +87,7 @@ namespace ExpensesManager
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=ExpenseType}/{action=Index}/{id?}");
+                    template: "{controller=Expenses}/{action=Graphics}/{id?}");
             });
         }
     }

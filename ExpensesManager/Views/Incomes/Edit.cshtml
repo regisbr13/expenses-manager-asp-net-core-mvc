@@ -4,7 +4,6 @@
     Layout = null;
     ViewData["Title"] = "Editar";
 }
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="modal-dialog">
@@ -28,7 +27,7 @@
                     <div class="form-group">
                         <label asp-for="Description" class="control-label col-md-3"></label>
                         <div class="col-md-6">
-                            <input asp-for="Description" class="form-control" />
+                            <textarea asp-for="Description" class="form-control" ></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                     </div>
@@ -42,7 +41,7 @@
                     <div class="form-group">
                         <label asp-for="Value" class="control-label col-md-3"></label>
                         <div class="col-md-6">
-                            <input asp-for="Value" class="form-control" />
+                            <input asp-for="Value" class="form-control" onkeyup="k(this)"/>
                             <span asp-validation-for="Value" class="text-danger"></span>
                         </div>
                     </div>
@@ -57,3 +56,13 @@
 </div>
 
 
+<script>
+    function k(i) {
+        var v = i.value.replace(/\D/g, '');
+        v = (v / 100).toFixed(2) + '';
+        v = v.replace(".", ",");
+        v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+        v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+        i.value = v;
+    }
+</script>

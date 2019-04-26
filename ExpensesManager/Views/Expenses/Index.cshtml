@@ -67,7 +67,7 @@
     </tbody>
 </table>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", "Incomes", new { page }), new PagedListRenderOptionsBase
+@Html.PagedListPager(Model, page => Url.Action("Index", "Expenses", new { page }), new PagedListRenderOptionsBase
 {
 ContainerDivClasses = new string[] { "text-center" },
 LiElementClasses = new string[] { "page-item" },

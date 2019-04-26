@@ -5,7 +5,6 @@
     ViewData["Title"] = "Nova";
 }
 
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="modal-dialog">
@@ -39,14 +38,14 @@
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-primary add" data-toggle="tooltip" data-placement="right" title="Novo tipo de receita"><i class="glyphicon glyphicon-plus-sign"></i></button>
                                 </span>
-                                <span asp-validation-for="IncomeTypeId" class="text-danger"></span>
                             </div>
+                            <span asp-validation-for="IncomeTypeId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="Value" class="control-label col-md-3"></label>
                         <div class="col-md-6">
-                            <input asp-for="Value" class="form-control" />
+                            <input asp-for="Value" class="form-control" onkeyup="k(this)"/>
                             <span asp-validation-for="Value" class="text-danger"></span>
                         </div>
                     </div>
@@ -73,4 +72,12 @@
         $('.new').tooltip()
     });
 
+        function k(i) {
+        var v = i.value.replace(/\D/g, '');
+        v = (v / 100).toFixed(2) + '';
+        v = v.replace(".", ",");
+        v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+        v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+        i.value = v;
+    }
 </script>

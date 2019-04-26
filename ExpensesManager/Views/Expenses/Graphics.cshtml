@@ -1,0 +1,30 @@
+﻿@model ExpensesManager.Models.ViewModels.GraphicsViewModel
+
+@{
+    ViewData["Title"] = "Estatísticas";
+}
+
+<h2 class="text-center text-info">Estatísticas</h2>
+
+<div class="row">
+    <div class="col-md-4 form-horizontal">
+        <label class="control-label col-md-4">Mês</label>
+        <div class="col-md-8">
+            <select class="form-control month" asp-items="ViewBag.months"></select>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col">
+        <partial name="_MonthlyExpenses" />
+    </div>
+</div>
+
+@section Scripts{ 
+    <script src="~/js/MonthlyTotal.js"></script>
+    
+    <script>
+        LoadData();
+    </script>
+}

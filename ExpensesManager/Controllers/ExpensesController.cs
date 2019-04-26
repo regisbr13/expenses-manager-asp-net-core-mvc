@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExpensesManager.Models;
+using ExpensesManager.Models.ViewModels;
 using ExpensesManager.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -142,6 +143,20 @@ namespace ExpensesManager.Controllers
             TempData["confirm"] = "Despesa exluída com sucesso.";
             await _expenseService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        // Graphics:
+        public async Task<IActionResult> Graphics()
+        {
+            ViewBag.months = new SelectList(await _expenseService.ExpenseIncomeMonths(), "Id", "Name");
+            return View();
+        }
+
+        public async Task<JsonResult> MonthlyTotal(int id)
+        {
+            GraphicsViewModel graphic = await _expenseService.FindGraphic();
+            var obj = new { expenses = graphic.MonthlyExpense(id), incomes = graphic.MonthlyIncome(id), total = graphic.MonthlyTotal(id) };
+            return Json(obj);   
         }
     }
 }
