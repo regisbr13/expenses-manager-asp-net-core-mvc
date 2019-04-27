@@ -24,7 +24,8 @@ namespace ExpensesManager.Models
 
         [Required(ErrorMessage = "campo obrigatório")]
         [Display(Name = "Valor")]
-        [Range(1, double.MaxValue, ErrorMessage = "valor inválido")]
+        [Range(0.1, double.MaxValue, ErrorMessage = "valor inválido")]
+        [DataType(DataType.Currency)]
         public double Value { get; set; }
     }
 }

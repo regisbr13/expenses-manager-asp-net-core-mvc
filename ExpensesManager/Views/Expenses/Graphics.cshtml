@@ -17,16 +17,35 @@
 <hr />
 
 <div class="row">
-    <div class="col">
+    <div class="col-md-4 col-xs-12 text-center">
         <partial name="_IncomesExpenses" />
     </div>
-
+    <div class="col-md-4 col-xs-12 text-center">
+        <partial name="_ExpensesType" />
+    </div>
+    <div class="col-md-4 col-xs-12 text-center">
+        <partial name="_IncomesType" />
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+        <partial name="_Total" />
+    </div>
 </div>
 
-@section Scripts{ 
+@section Scripts{
+    <script src="~/js/Colors.js"></script>
+    <script src="~/js/MonthlyExpensesType.js"></script>
     <script src="~/js/MonthlyIncomesExpenses.js"></script>
-    
+    <script src="~/js/MonthlyIncomesType.js"></script>
+    <script src="~/js/IncomesExpensesTotal.js"></script>
+
+
     <script>
         LoadDataIncomesExpenses();
+        LoadDataMonthlyExpensesType();
+        LoadDataMonthlyIncomesType();
+        LoadDataIncomesExpensesTotal();
     </script>
 }

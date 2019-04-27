@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label asp-for="Value" class="control-label col-md-3"></label>
                         <div class="col-md-6">
-                            <input asp-for="Value" class="form-control" onkeyup="k(this)" />
+                            <input asp-for="Value" class="form-control" value="@Model.Value.ToString("F2")" onkeyup="k(this)" />
                             <span asp-validation-for="Value" class="text-danger"></span>
                         </div>
                     </div>

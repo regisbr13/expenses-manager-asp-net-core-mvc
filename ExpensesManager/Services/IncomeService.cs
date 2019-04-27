@@ -81,5 +81,30 @@ namespace ExpensesManager.Services
             return await _context.Incomes.Include(i => i.Month).Include(i => i.IncomeType).Where(i => i.Description.ToUpper().Contains(s.ToUpper())).ToListAsync();
         }
 
+        // Despesas por mês:
+        public List<string> IncomesTypeByMonthId(int id)
+        {
+            var grouping = _context.Incomes.Where(e => e.MonthId == id).GroupBy(x => x.IncomeType.Name);
+            var list = new List<string>();
+
+            foreach (IGrouping<string, Income> group in grouping)
+            {
+                list.Add(group.Key.ToString());
+            }
+            return list;
+        }
+
+        public List<double> ValuesIncomesTypeByMonthId(int id)
+        {
+            var grouping = _context.Incomes.Where(e => e.MonthId == id).GroupBy(x => x.IncomeType.Name);
+            var list = new List<double>();
+
+            foreach (IGrouping<string, Income> group in grouping)
+            {
+                list.Add(group.Sum(e => e.Value));
+            }
+            return list;
+        }
+
     }
 }

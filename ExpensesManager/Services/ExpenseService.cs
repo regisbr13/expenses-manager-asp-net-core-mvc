@@ -101,6 +101,32 @@ namespace ExpensesManager.Services
         {
             return _context.Expenses.Where(i => i.MonthId == id).Sum(i => i.Value);
         }
+
+        // Despesas por mês:
+        public List<string> ExpensesTypeByMonthId(int id)
+        {
+            var grouping = _context.Expenses.Where(e => e.MonthId == id).GroupBy(x => x.ExpenseType.Name);
+            var list = new List<string>();
+
+            foreach (IGrouping<string, Expense> group in grouping)
+            {
+                list.Add(group.Key.ToString());
+            }
+            return list;
+        }
+
+        public List<double> ValuesExpensesTypeByMonthId(int id)
+        {
+            var grouping = _context.Expenses.Where(e => e.MonthId == id).GroupBy(x => x.ExpenseType.Name);
+            var list = new List<double>();
+
+            foreach (IGrouping<string, Expense> group in grouping)
+            {
+                list.Add(group.Sum(e => e.Value));
+            }
+            return list;
+        }
+
     }
 }
 

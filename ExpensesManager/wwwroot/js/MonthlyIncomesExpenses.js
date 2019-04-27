@@ -1,5 +1,4 @@
-﻿Chart.defaults.global.legend.display = false;
-$(".month").on('change', function () {
+﻿$(".month").on('change', function () {
     var id = $(".month").val();
 
     $.ajax({
@@ -14,20 +13,30 @@ $(".month").on('change', function () {
 
             var graphic = new Chart(ctx, {
                 type: 'bar',   
-
                 data: {
-                    labels: ['Receitas', 'Despesas'],
+                    labels: [''],
                     datasets: [{
-                        label: null,
-                        backgroundColor: ["#27ae60", "#c0392b"],
-                        data: [data.incomes, data.expenses]
-                    }]
+                        label: 'Receitas',
+                        backgroundColor: ["#27ae60", "#c0392b", "#00BFFF"],
+                        data: [data.incomes],
+                    },
+                    {
+                        label: 'Despesas',
+                        backgroundColor: "#c0392b",
+                        data: [data.expenses]
+                    },
+                    {
+                        label: 'Saldo',
+                        backgroundColor: "#00BFFF",
+                        data: [data.balance]
+                    },
+                    ]
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     title: {
                         display: true,
-                        text: "Receitas x Despesas"
+                        text: "Receitas x Despesas x Saldo"
                     },
                     scales: {
                         yAxes: [{
@@ -62,18 +71,29 @@ function LoadDataIncomesExpenses() {
                 type: 'bar',
 
                 data: {
-                    labels: ['Receitas', 'Despesas'],
+                    labels: [''],
                     datasets: [{
-                        label: null,
-                        backgroundColor: ["#27ae60", "#c0392b"],
-                        data: [data.incomes, data.expenses]
-                    }]
+                        label: 'Receitas',
+                        backgroundColor: ["#27ae60", "#c0392b", "#00BFFF"],
+                        data: [data.incomes],
+                    },
+                    {
+                        label: 'Despesas',
+                        backgroundColor: "#c0392b",
+                        data: [data.expenses]
+                    },
+                    {
+                        label: 'Saldo',
+                        backgroundColor: "#00BFFF",
+                        data: [data.balance]
+                    },
+                    ]
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     title: {
                         display: true,
-                        text: "Receitas x Despesas"
+                        text: "Receitas x Despesas x Saldo"
                     },
                     scales: {
                         yAxes: [{
@@ -82,7 +102,7 @@ function LoadDataIncomesExpenses() {
                             }
                         }],
                         xAxes: [{
-                            barPercentage: 0.5
+                            barPercentage: 0.6
                         }]
                     }
                 }

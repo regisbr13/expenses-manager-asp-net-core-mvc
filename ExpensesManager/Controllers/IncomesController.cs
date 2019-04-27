@@ -143,5 +143,12 @@ namespace ExpensesManager.Controllers
             await _incomeService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public JsonResult MonthlyIncomesType(int id)
+        {
+            var types = _incomeService.IncomesTypeByMonthId(id);
+            var values = _incomeService.ValuesIncomesTypeByMonthId(id);
+            return Json(new {types, values});
+        }
     }
 }

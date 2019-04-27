@@ -154,8 +154,35 @@ namespace ExpensesManager.Controllers
 
         public JsonResult MonthlyIncomesExpenses(int id)
         {
-            var obj = new { expenses = _expenseService.MonthlyExpenses(id), incomes = _expenseService.MonthlyIncome(id)};
+            var expenses = _expenseService.MonthlyExpenses(id);
+            var incomes = _expenseService.MonthlyIncome(id);
+            var balance = incomes - expenses;
+
+            var obj = new { expenses, incomes, balance};
             return Json(obj);   
+        }
+
+        public JsonResult MonthlyExpensesType(int id)
+        {
+            var types = _expenseService.ExpensesTypeByMonthId(id);
+            var values = _expenseService.ValuesExpensesTypeByMonthId(id);
+            return Json(new {types, values});
+        }
+
+        public async Task<JsonResult> IncomesExpensesTotal()
+        {
+            var list = await _expenseService.ExpenseIncomeMonths();
+            var months = list.Select(m => m.Name);
+            double[] expenses = new double[months.Count()];
+            double[] incomes = new double[months.Count()];
+
+            for(int i = 1; i <= months.Count(); i++)
+            {
+                expenses[i - 1] = _expenseService.MonthlyExpenses(i);
+                incomes[i - 1] = _expenseService.MonthlyIncome(i);
+            }
+
+            return Json(new { months, expenses, incomes});
         }
     }
 }
