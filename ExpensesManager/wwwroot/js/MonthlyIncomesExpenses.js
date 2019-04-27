@@ -3,14 +3,14 @@ $(".month").on('change', function () {
     var id = $(".month").val();
 
     $.ajax({
-        url: "Expenses/MonthlyTotal",
+        url: "Expenses/MonthlyIncomesExpenses",
         method: "POST",
         data: { id: id },
         success: function (data) {
-            $("canvas#MonthlyExpenses").remove();
-            $("div.MonthlyExpenses").append('<canvas id="MonthlyExpenses" style="width:400px; height:400px"></canvas>');
+            $("canvas#IncomesExpenses").remove();
+            $("div.IncomesExpenses").append('<canvas id="IncomesExpenses" style="width:400px; height:400px"></canvas>');
 
-            var ctx = document.getElementById('MonthlyExpenses').getContext('2d');
+            var ctx = document.getElementById('IncomesExpenses').getContext('2d');
 
             var graphic = new Chart(ctx, {
                 type: 'bar',   
@@ -46,17 +46,17 @@ $(".month").on('change', function () {
 });
 
 
-function LoadData() {
+function LoadDataIncomesExpenses() {
 
     $.ajax({
-        url: "Expenses/MonthlyTotal",
+        url: "Expenses/MonthlyIncomesExpenses",
         method: "POST",
         data: { id: 1 },
         success: function (data) {
-            $("canvas#MonthlyExpenses").remove();
-            $("div.MonthlyExpenses").append('<canvas id="MonthlyExpenses" style="width:400px; height:400px"></canvas>');
+            $("canvas#IncomesExpenses").remove();
+            $("div.IncomesExpenses").append('<canvas id="IncomesExpenses" style="width:400px; height:400px"></canvas>');
 
-            var ctx = document.getElementById('MonthlyExpenses').getContext('2d');
+            var ctx = document.getElementById('IncomesExpenses').getContext('2d');
 
             var graphic = new Chart(ctx, {
                 type: 'bar',

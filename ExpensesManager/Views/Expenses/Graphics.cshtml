@@ -1,4 +1,4 @@
-﻿@model ExpensesManager.Models.ViewModels.GraphicsViewModel
+﻿@model ExpensesManager.Models.Expense
 
 @{
     ViewData["Title"] = "Estatísticas";
@@ -15,16 +15,18 @@
     </div>
 </div>
 <hr />
+
 <div class="row">
     <div class="col">
-        <partial name="_MonthlyExpenses" />
+        <partial name="_IncomesExpenses" />
     </div>
+
 </div>
 
 @section Scripts{ 
-    <script src="~/js/MonthlyTotal.js"></script>
+    <script src="~/js/MonthlyIncomesExpenses.js"></script>
     
     <script>
-        LoadData();
+        LoadDataIncomesExpenses();
     </script>
 }

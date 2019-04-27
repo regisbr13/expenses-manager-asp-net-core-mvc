@@ -152,10 +152,9 @@ namespace ExpensesManager.Controllers
             return View();
         }
 
-        public async Task<JsonResult> MonthlyTotal(int id)
+        public JsonResult MonthlyIncomesExpenses(int id)
         {
-            GraphicsViewModel graphic = await _expenseService.FindGraphic();
-            var obj = new { expenses = graphic.MonthlyExpense(id), incomes = graphic.MonthlyIncome(id), total = graphic.MonthlyTotal(id) };
+            var obj = new { expenses = _expenseService.MonthlyExpenses(id), incomes = _expenseService.MonthlyIncome(id)};
             return Json(obj);   
         }
     }

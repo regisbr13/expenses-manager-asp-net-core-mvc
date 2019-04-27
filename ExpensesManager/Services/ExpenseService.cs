@@ -91,15 +91,15 @@ namespace ExpensesManager.Services
             return await _context.Months.Where(m => list.Contains(m.Id)).ToListAsync();
         }
 
-        // Dados para o grafico:
-        public async Task<GraphicsViewModel> FindGraphic()
+        // Dados para o grafico Receitas x Despesas:
+        public double MonthlyIncome(int id)
         {
-            GraphicsViewModel graphic = new GraphicsViewModel()
-            {
-                Expenses = await _context.Expenses.ToListAsync(),
-                Incomes = await _context.Incomes.ToListAsync()
-            };
-            return graphic;
+            return _context.Incomes.Where(i => i.MonthId == id).Sum(i => i.Value);
+        }
+
+        public double MonthlyExpenses(int id)
+        {
+            return _context.Expenses.Where(i => i.MonthId == id).Sum(i => i.Value);
         }
     }
 }
