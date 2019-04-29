@@ -5,7 +5,7 @@
     ViewData["Title"] = "Nova";
 }
 
-
+    <script src="~/js/bundle.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="modal-dialog">
@@ -61,24 +61,3 @@
 </div>
 
 <div class="modal fade" id="modal" role="dialog"></div>
-
-<script>
-    $(".add").click(function () {
-        $("#modal").load("ExpenseType/Create", function () {
-            $("#modal").modal();
-        })
-    })
-
-    $(document).ready(function () {
-        $('.new').tooltip()
-    });
-
-    function k(i) {
-        var v = i.value.replace(/\D/g, '');
-        v = (v / 100).toFixed(2) + '';
-        v = v.replace(".", ",");
-        v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
-        v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
-        i.value = v;
-    }
-</script>

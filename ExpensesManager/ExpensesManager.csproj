@@ -6,11 +6,54 @@
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
-    <Content Remove="wwwroot\js\bundle.js" />
+    <Content Remove="wwwroot\js\bundle.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\Colors.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\CurrentExpensesType.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\CurrentIncomesExpenses.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\CurrentIncomesType.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\IncomesExpensesTotal.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\ModalCurrent.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\MonthlyExpensesType.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\MonthlyIncomesExpenses.js" />
+    <None Remove="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\MonthlyIncomesType.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\Colors.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\CurrentExpensesType.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\CurrentIncomesExpenses.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\CurrentIncomesType.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\IncomesExpensesTotal.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\ModalCurrent.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\MonthlyExpensesType.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\MonthlyIncomesExpenses.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="#\AspNetCore\ExpensesManager\ExpensesManager\#\AspNetCore\ExpensesManager\ExpensesManager\wwwroot\js\MonthlyIncomesType.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="wwwroot\js\bundle.min.js" />
   </ItemGroup>
 
   <ItemGroup>

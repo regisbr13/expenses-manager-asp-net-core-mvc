@@ -29,7 +29,7 @@
                             <div class="input-group">
                                 <select asp-for="IncomeTypeId" class="form-control" asp-items="ViewBag.IncomeTypeId"></select>
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-primary add" data-toggle="tooltip" data-placement="right" title="Novo tipo de receita"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                    <button type="button" class="btn btn-primary addIt" data-toggle="tooltip" data-placement="right" title="Novo tipo de receita"><i class="glyphicon glyphicon-plus-sign"></i></button>
                                 </span>
                             </div>
                             <span asp-validation-for="IncomeTypeId" class="text-danger"></span>
@@ -55,25 +55,4 @@
 <div class="modal fade" id="modal" role="dialog"></div>
 
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
-<script>
-
-    $(".add").click(function () {
-        $("#modal").load("/IncomeType/Create", function () {
-            $("#modal").modal();
-        })
-    })
-
-    $(document).ready(function () {
-        $('.new').tooltip()
-    });
-
-    function k(i) {
-        var v = i.value.replace(/\D/g, '');
-        v = (v / 100).toFixed(2) + '';
-        v = v.replace(".", ",");
-        v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
-        v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
-        i.value = v;
-    }
-</script>
+<script src="~/js/bundle.min.js"></script>

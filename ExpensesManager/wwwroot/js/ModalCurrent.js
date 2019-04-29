@@ -49,3 +49,28 @@ $(function () {
         })
     })
 });
+
+$(".add").click(function () {
+    $("#modal").load("ExpenseType/Create", function () {
+        $("#modal").modal();
+    })
+})
+
+$(".addIt").click(function () {
+    $("#modal").load("/IncomeType/Create", function () {
+        $("#modal").modal();
+    })
+})
+
+$(document).ready(function () {
+    $('.new').tooltip()
+});
+
+function k(i) {
+    var v = i.value.replace(/\D/g, '');
+    v = (v / 100).toFixed(2) + '';
+    v = v.replace(".", ",");
+    v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+    v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+    i.value = v;
+}
