@@ -1,6 +1,6 @@
 ﻿function LoadDataIncomesExpensesTotal() {
     $.ajax({
-        url: "Expenses/IncomesExpensesTotal",
+        url: "/Expenses/IncomesExpensesTotal",
         method: "POST",
         success: function (data) {
 

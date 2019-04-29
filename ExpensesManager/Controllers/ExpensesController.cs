@@ -67,6 +67,12 @@ namespace ExpensesManager.Controllers
             return View();
         }
 
+        public async Task<IActionResult> CreateCurrent()
+        {
+            ViewBag.ExpenseTypeId = new SelectList(await _expenseService.FindAllExpenseType(), "Id", "Name");
+            return View();
+        }
+
         // CREATE POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,6 +86,21 @@ namespace ExpensesManager.Controllers
             }
             return View(obj);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCurrent(Expense obj)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["confirm"] = "Despesa cadastrada com sucesso.";
+                await _expenseService.InsertAsync(obj);
+                return RedirectToAction(nameof(CurrentStats));
+            }
+            return View(obj);
+        }
+
+
 
         // EDIT GET:
         public async Task<IActionResult> Edit(int? id)
@@ -113,6 +134,8 @@ namespace ExpensesManager.Controllers
             {
                 TempData["confirm"] = "Despesa atualizada com sucesso.";
                 await _expenseService.UpdateAsync(obj);
+                if (obj.MonthId == DateTime.Now.Month)
+                    return RedirectToAction(nameof(CurrentStats));
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
@@ -141,11 +164,15 @@ namespace ExpensesManager.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             TempData["confirm"] = "Despesa exluída com sucesso.";
+            Expense obj = await _expenseService.FindByIdAsync(id);
             await _expenseService.RemoveAsync(id);
+            if (obj.MonthId == DateTime.Now.Month)
+                return RedirectToAction(nameof(CurrentStats));
             return RedirectToAction(nameof(Index));
         }
 
         // Graphics:
+        [HttpGet("/Estatisticas")]
         public async Task<IActionResult> Graphics()
         {
             ViewBag.months = new SelectList(await _expenseService.ExpenseIncomeMonths(), "Id", "Name");
@@ -183,6 +210,15 @@ namespace ExpensesManager.Controllers
             }
 
             return Json(new { months, expenses, incomes});
+        }
+
+        public async Task<IActionResult> CurrentStats()
+        {
+            var month = DateTime.Now.Month;
+            ViewBag.month = _expenseService.CurrentMonth().Name;
+            ViewBag.incomes = await _expenseService.IncomesByMonth(month);
+            ViewBag.expenses = await _expenseService.ExpensesByMonth(month);
+            return View();
         }
     }
 }

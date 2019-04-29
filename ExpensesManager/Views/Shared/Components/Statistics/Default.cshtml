@@ -1,0 +1,24 @@
+﻿@model ExpensesManager.Models.ViewModels.StatisticsViewModel
+
+<div class="col-md-6">
+    <div class="col-md-11 alert alert-danger centered">
+        <p>Total de despesas registradas: <strong>@Model.StatisticsExpenses[0]</strong></p>
+        <p>Maior despesa registrada: <strong>@Model.StatisticsExpenses[1]</strong></p>
+        <p>Menor despesa registrada: <strong>@Model.StatisticsExpenses[2]</strong></p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="col-md-11 alert alert-success centered">
+        <p>Total de receitas registradas: <strong>@Model.StatisticsIncomes[0]</strong></p>
+        <p>Maior receitas registrada: <strong>@Model.StatisticsIncomes[1]</strong></p>
+        <p>Menor receitas registrada: <strong>@Model.StatisticsIncomes[2]</strong></p>
+    </div>
+</div>
+
+    <style>
+        .centered {
+            margin: 0 auto !important;
+            float: none !important;
+        }
+    </style>

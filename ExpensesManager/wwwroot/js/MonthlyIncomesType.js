@@ -2,7 +2,7 @@
     var id = $(".month").val();
 
     $.ajax({
-        url: "Incomes/MonthlyIncomesType",
+        url: "/Incomes/MonthlyIncomesType",
         method: "POST",
         data: { id: id },
         success: function (data) {
@@ -39,7 +39,7 @@ function LoadDataMonthlyIncomesType() {
     var id = $(".month").val();
 
     $.ajax({
-        url: "Incomes/MonthlyIncomesType",
+        url: "/Incomes/MonthlyIncomesType",
         method: "POST",
         data: { id: 1 },
         success: function (data) {

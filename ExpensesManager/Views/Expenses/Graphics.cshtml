@@ -1,10 +1,9 @@
-﻿@model ExpensesManager.Models.Expense
-
+﻿
 @{
     ViewData["Title"] = "Estatísticas";
 }
 
-<h2 class="text-center text-info">Estatísticas</h2>
+<h2 class="text-center text-primary">Estatísticas</h2>
 
 <div class="row">
     <div class="col-md-4 form-horizontal">
@@ -21,16 +20,24 @@
         <partial name="_IncomesExpenses" />
     </div>
     <div class="col-md-4 col-xs-12 text-center">
-        <partial name="_ExpensesType" />
-    </div>
-    <div class="col-md-4 col-xs-12 text-center">
         <partial name="_IncomesType" />
     </div>
+    <div class="col-md-4 col-xs-12 text-center">
+        <partial name="_ExpensesType" />
+    </div>
 </div>
+
 <hr />
+
 <div class="row">
     <div class="col-md-10 col-md-offset-1 col-xs-12">
         <partial name="_Total" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="text-center">
+        @await Component.InvokeAsync("Statistics")
     </div>
 </div>
 
@@ -49,3 +56,10 @@
         LoadDataIncomesExpensesTotal();
     </script>
 }
+
+<style>
+    .centered {
+        margin: 0 auto !important;
+        float: none !important;
+    }
+</style>

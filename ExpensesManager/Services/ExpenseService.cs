@@ -24,6 +24,16 @@ namespace ExpensesManager.Services
             return await _context.Expenses.Include(i => i.Month).Include(i => i.ExpenseType).OrderBy(i => i.MonthId).ToListAsync();
         }
 
+        public async Task<List<Expense>> ExpensesByMonth(int id)
+        {
+            return await _context.Expenses.Include(e => e.ExpenseType).Where(e => e.MonthId == id).ToListAsync();
+        }
+
+        public async Task<List<Income>> IncomesByMonth(int id)
+        {
+            return await _context.Incomes.Include(e => e.IncomeType).Where(e => e.MonthId == id).ToListAsync();
+        }
+
         // Listar meses:
         public async Task<List<Month>> FindAllMonths()
         {
@@ -127,6 +137,20 @@ namespace ExpensesManager.Services
             return list;
         }
 
+        public double[] StatsExpenses()
+        {
+            var statisticsExpenses = new double[3];
+            statisticsExpenses[0] = _context.Expenses.Count();
+            statisticsExpenses[1] = _context.Expenses.Max(e => e.Value);
+            statisticsExpenses[2] = _context.Expenses.Min(e => e.Value);
+            return statisticsExpenses;
+        }
+
+        public Month CurrentMonth()
+        {
+            int month = DateTime.Now.Month;
+            return  _context.Months.Where(m => m.Id == month).FirstOrDefault();
+        }
     }
 }
 

@@ -66,6 +66,12 @@ namespace ExpensesManager.Controllers
             return View();
         }
 
+        public async Task<IActionResult> CreateCurrent()
+        {
+            ViewBag.IncomeTypeId = new SelectList(await _incomeService.FindAllIncomeType(), "Id", "Name");
+            return View();
+        }
+
         // CREATE POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -76,6 +82,19 @@ namespace ExpensesManager.Controllers
                 TempData["confirm"] = "Receita cadastrada com sucesso.";
                 await _incomeService.InsertAsync(obj);
                 return RedirectToAction(nameof(Index));
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCurrent(Income obj)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["confirm"] = "Receita cadastrada com sucesso.";
+                await _incomeService.InsertAsync(obj);
+                return RedirectToAction("CurrentStats", "Expenses");
             }
             return View(obj);
         }
@@ -112,6 +131,8 @@ namespace ExpensesManager.Controllers
             {
                 TempData["confirm"] = "Receita atualizada com sucesso.";
                 await _incomeService.UpdateAsync(obj);
+                if(obj.MonthId == DateTime.Now.Month)
+                    return RedirectToAction("CurrentStats", "Expenses");
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
@@ -140,7 +161,10 @@ namespace ExpensesManager.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             TempData["confirm"] = "Receita exluída com sucesso.";
+            Income obj =await _incomeService.FindByIdAsync(id);
             await _incomeService.RemoveAsync(id);
+            if (obj.MonthId == DateTime.Now.Month)
+                return RedirectToAction("CurrentStats", "Expenses");
             return RedirectToAction(nameof(Index));
         }
 

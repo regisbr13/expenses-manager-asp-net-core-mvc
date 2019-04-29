@@ -2,7 +2,7 @@
     var id = $(".month").val();
 
     $.ajax({
-        url: "Expenses/MonthlyIncomesExpenses",
+        url: "/Expenses/MonthlyIncomesExpenses",
         method: "POST",
         data: { id: id },
         success: function (data) {
@@ -58,9 +58,9 @@
 function LoadDataIncomesExpenses() {
 
     $.ajax({
-        url: "Expenses/MonthlyIncomesExpenses",
+        url: "/Expenses/MonthlyIncomesExpenses",
         method: "POST",
-        data: { id: 1 },
+        data: { id: 1},
         success: function (data) {
             $("canvas#IncomesExpenses").remove();
             $("div.IncomesExpenses").append('<canvas id="IncomesExpenses" style="width:400px; height:400px"></canvas>');

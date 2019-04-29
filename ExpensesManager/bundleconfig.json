@@ -1,0 +1,25 @@
+[
+  {
+    "outputFileName": "C:/Users/Regis/Desktop/bundle.js",
+    "inputFiles": [
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\Colors.js",
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\IncomesExpensesTotal.js",
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\MonthlyExpensesType.js",
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\MonthlyIncomesExpenses.js",
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\MonthlyIncomesType.js"
+    ]
+  },
+  {
+    "outputFileName": "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\css\\site.min.css",
+    "inputFiles": [
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\css\\site.css"
+    ]
+  },
+  {
+    "outputFileName": "C:/Users/Regis/Desktop/teste.js",
+    "inputFiles": [
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\IncomesExpensesTotal.js",
+      "#\\AspNetCore\\ExpensesManager\\ExpensesManager\\wwwroot\\js\\MonthlyExpensesType.js"
+    ]
+  }
+]

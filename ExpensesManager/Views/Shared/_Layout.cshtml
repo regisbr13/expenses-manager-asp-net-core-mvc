@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Gerenciador Financeiro</title>
+    <title>@ViewData["Title"] - Finanças Pessoais</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Expenses" asp-action="Graphics" class="navbar-brand">Gerenciador Financeiro</a>
+                <a asp-area="" asp-controller="Expenses" asp-action="CurrentStats" class="navbar-brand">Finanças Pessoais</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -32,6 +32,7 @@
                     <li><a asp-area="" asp-controller="Expenses" asp-action="Index">Despesas</a></li>
                     <li><a asp-area="" asp-controller="ExpenseType" asp-action="Index">Tipos de despesa</a></li>
                     <li><a asp-area="" asp-controller="IncomeType" asp-action="Index">Tipos de receita</a></li>
+                    <li><a asp-area="" asp-controller="Expenses" asp-action="Graphics">Estatísticas</a></li>
                 </ul>
             </div>
         </div>

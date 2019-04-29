@@ -105,6 +105,14 @@ namespace ExpensesManager.Services
             }
             return list;
         }
+        public double[] StatsIncomes()
+        {
+            var statisticsIncomes = new double[3];
+            statisticsIncomes[0] = _context.Incomes.Count();
+            statisticsIncomes[1] = _context.Incomes.Max(e => e.Value);
+            statisticsIncomes[2] = _context.Incomes.Min(e => e.Value);
+            return statisticsIncomes;
+        }
 
     }
 }

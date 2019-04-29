@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2 class="text-center text-primary">@ViewBag.month</h2>
+@if (TempData["confirm"] != null)
+{
+    <h6 class="alert alert-success" role="alert">@TempData["confirm"]</h6>
+}<hr />
+ <div class="row">
+     <div class="col-md-4 col-xs-12 text-center">
+         <partial name="_IncomesExpenses" />
+     </div>
+     <div class="col-md-4 col-xs-12 text-center">
+         <partial name="_IncomesType" />
+     </div>
+     <div class="col-md-4 col-xs-12 text-center">
+         <partial name="_ExpensesType" />
+     </div>
+ </div>
+<hr />
+
+<div class="row">
+    <h3 class="text-center text-success">Receitas</h3>
+    <div class="col-md-10 col-md-offset-1">
+        <div>
+            <a class="btn btn-default btn-sm createIncome" style="color:#3C763D"><i class="glyphicon glyphicon-plus-sign"></i></a>
+        </div>
+        <table class="table table-hover text-center">
+            <thead style="background-color: #3C763D; color:white">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="bg-success">
+                @foreach (Income e in ViewBag.incomes)
+                {
+                    <tr>
+                        <td>@e.IncomeType.Name</td>
+                        <td>@e.Description</td>
+                        <td>@Html.DisplayFor(ViewBage => e.Value)</td>
+                        <td>
+                            <a class="btn editIncome edit" data-id="@e.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn deleteIncome delete" data-id="@e.Id"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <h3 class="text-center text-danger">Despesas</h3>
+
+    <div class="col-md-10 col-md-offset-1">
+        <div>
+            <a class="btn btn-default btn-sm createExpense" style="color:#B05351"><i class="glyphicon glyphicon-plus-sign"></i></a>
+        </div>
+        <table class="table table-hover text-center">
+            <thead style="background-color: #B05351; color:white">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="bg-danger">
+                @foreach (Expense e in ViewBag.expenses)
+                {
+                    <tr>
+                        <td>@e.ExpenseType.Name</td>
+                        <td>@e.Description</td>
+                        <td>@Html.DisplayFor(ViewBage => e.Value)</td>
+                        <td>
+                            <a class="btn editExpense edit" data-id="@e.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn deleteExpense delete" data-id="@e.Id"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" role="dialog"></div>
+
+
+@section Scripts{
+    <script src="~/js/CurrentIncomesExpenses.js"></script>
+    <script src="~/js/ModalCurrent.js"></script>
+    <script src="~/js/CurrentExpensesType.js"></script>
+    <script src="~/js/Colors.js"></script>
+    <script src="~/js/CurrentIncomesType.js"></script>
+
+    <script>
+        LoadDataCurrent()
+        LoadDataMonthlyExpensesType()
+        LoadDataMonthlyIncomesType()
+    </script>
+
+}
+
+<style>
+    th {
+        text-align: center;
+    }
+
+    .edit {
+        color: orange;
+    }
+
+    .delete {
+        color: orangered;
+    }
+</style>
